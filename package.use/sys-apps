@@ -1,0 +1,6 @@
+sys-apps/busybox -ipv6 -pam static
+sys-apps/debianutils -installkernel
+sys-apps/iproute2 -iptables
+sys-apps/openrc -netifrc
+sys-apps/portage gentoo-dev -rsync-verify
+sys-apps/util-linux -cramfs

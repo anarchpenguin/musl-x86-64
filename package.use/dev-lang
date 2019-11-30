@@ -1,0 +1,2 @@
+dev-lang/python sqlite
+dev-lang/spidermonkey custom-cflags custom-optimization

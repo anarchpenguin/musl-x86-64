@@ -1,0 +1,3 @@
+media-libs/freetype harfbuzz
+media-libs/mesa vulkan
+media-libs/libpng apng
