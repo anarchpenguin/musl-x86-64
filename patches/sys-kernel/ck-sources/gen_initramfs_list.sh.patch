@@ -1,0 +1,30 @@
+From 6a7ef73882393e23e966e7b53e7b03397ad18e63 Mon Sep 17 00:00:00 2001
+From: Jory Pratt <anarchy@gentoo.org>
+Date: Wed, 4 Dec 2019 09:30:17 -0600
+Subject: [PATCH] gen_initramfs_list.sh is a bash script that isn't posix
+ compliant.
+
+This ensures we call bash instead of sh which could be dash or any other
+shell that is not compatible with the script.
+
+Signed-off-by: Jory Pratt <anarchy@gentoo.org>
+---
+ usr/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/usr/Makefile b/usr/Makefile
+index e6f7cb2f81db..27987f18eb20 100644
+--- a/usr/Makefile
++++ b/usr/Makefile
+@@ -27,7 +27,7 @@ $(obj)/initramfs_data.o: $(obj)/$(datafile_y) FORCE
+ # Generate the initramfs cpio archive
+ 
+ hostprogs-y := gen_init_cpio
+-initramfs   := $(CONFIG_SHELL) $(srctree)/$(src)/gen_initramfs_list.sh
++initramfs   := $(BASH) $(srctree)/$(src)/gen_initramfs_list.sh
+ ramfs-input := $(if $(filter-out "",$(CONFIG_INITRAMFS_SOURCE)), \
+ 			$(shell echo $(CONFIG_INITRAMFS_SOURCE)),-d)
+ ramfs-args  := \
+-- 
+2.24.0
+
