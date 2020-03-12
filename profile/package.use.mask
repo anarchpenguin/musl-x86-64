@@ -1,2 +1,0 @@
-# See bug #504200
-sys-devel/gcc sanitize -vtv

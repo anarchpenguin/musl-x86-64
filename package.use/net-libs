@@ -1,2 +1,2 @@
 net-libs/libpsl -idn
-net-libs/nodejs bundled-ssl inspector
+net-libs/nodejs inspector -system-ssl
