@@ -1,27 +1,15 @@
-From 6b74147fc8de0ada711175aa46876fc7d41b562f Mon Sep 17 00:00:00 2001
-From: "Jory A. Pratt" <anarchy@gentoo.org>
-Date: Mon, 11 Jun 2018 04:08:38 -0500
-Subject: [PATCH] add support for linux-musl to configure and remove glibc
- check
-
----
- configure.ac | 23 ++++-------------------
- 1 file changed, 4 insertions(+), 19 deletions(-)
-
-diff --git a/configure.ac b/configure.ac
-index 848dc4ff3..666a9ee04 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -573,7 +573,7 @@ solaris*)
+@@ -612,7 +612,7 @@
      fi
      ;;
  
 -linux-gnu*|k*bsd*-gnu*)
 +linux-gnu*|linux-musl*|k*bsd*-gnu*)
-     test_gtk=yes
      build_gstreamer_1_0=yes
-     build_gstreamer_0_10=yes
-@@ -4012,7 +4012,7 @@ kfreebsd*)
+     test_kf5=yes
+     test_gtk3_kde5=yes
+@@ -4353,7 +4353,7 @@
      esac
      ;;
  
@@ -30,7 +18,7 @@ index 848dc4ff3..666a9ee04 100644
      COM=GCC
      USING_X11=TRUE
      OS=LINUX
-@@ -6957,7 +6957,7 @@ if test -n "$ENABLE_JAVA" -a -z "$JAVAINC"; then
+@@ -7672,7 +7672,7 @@
          test -d "$JAVA_HOME/include/native_thread" && JAVAINC="$JAVAINC -I$JAVA_HOME/include/native_thread"
          ;;
  
@@ -39,9 +27,9 @@ index 848dc4ff3..666a9ee04 100644
          JAVAINC="-I$JAVA_HOME/include"
          JAVAINC="$JAVAINC -I$JAVA_HOME/include/linux"
          test -d "$JAVA_HOME/include/native_thread" && JAVAINC="$JAVAINC -I$JAVA_HOME/include/native_thread"
-@@ -9460,21 +9460,6 @@ if test "$with_system_libexttextcat" = "yes"; then
- fi
- AC_SUBST(SYSTEM_LIBEXTTEXTCAT_DATA)
+@@ -10260,21 +10260,6 @@
+ AC_SUBST(ENABLE_LIBNUMBERTEXT)
+ AC_SUBST(LIBNUMBERTEXT_CFLAGS)
  
 -dnl ***************************************
 -dnl testing libc version for Linux...
@@ -61,7 +49,7 @@ index 848dc4ff3..666a9ee04 100644
  dnl =========================================
  dnl Check for uuidgen
  dnl =========================================
-@@ -12470,7 +12455,7 @@ else
+@@ -12812,7 +12812,7 @@
  
      case "$host_os" in
  
@@ -70,6 +58,3 @@ index 848dc4ff3..666a9ee04 100644
          if test "$ENABLE_JAVA" != ""; then
              pathmunge "$JAVA_HOME/bin" "after"
          fi
--- 
-2.17.1
-
