@@ -1,2 +1,3 @@
 dev-lang/python sqlite
+dev-lang/rust system-bootstrap system-llvm
 dev-lang/spidermonkey custom-cflags custom-optimization
