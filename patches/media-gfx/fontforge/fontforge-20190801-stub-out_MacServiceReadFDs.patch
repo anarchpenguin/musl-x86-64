@@ -1,0 +1,38 @@
+From 42d12f06f99673f61f06ef1bb37ccf6e3d570c97 Mon Sep 17 00:00:00 2001
+From: Mike Gilbert <floppym@gentoo.org>
+Date: Sun, 29 Mar 2020 17:26:16 -0400
+Subject: [PATCH] Stub-out MacServiceReadFDs() on non-Mac platforms
+
+This should fix a build failure on Linux with musl libc due to the
+missing sys/select.h include.
+
+MacServiceReadFDs seems to only be called in startui.c, also behind the
+__Mac macro.
+
+Bug: https://bugs.gentoo.org/706792
+---
+ gdraw/gdraw.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/gdraw/gdraw.c b/gdraw/gdraw.c
+index 1fb3354b1d..6bac57b92a 100644
+--- a/gdraw/gdraw.c
++++ b/gdraw/gdraw.c
+@@ -32,7 +32,7 @@
+ #include "gkeysym.h"
+ #include "ustring.h"
+ 
+-#if __Mac || __FreeBSD__ || __NetBSD__ || __OpenBSD__ || __DragonFly__
++#if __Mac
+ #  include <sys/select.h>
+ #endif
+ 
+@@ -1076,7 +1076,7 @@ GDrawRemoveReadFD( GDisplay *gdisp,
+ 
+ void MacServiceReadFDs()
+ {
+-#if (!defined(__MINGW32__))&&(!defined(__CYGWIN__))
++#if __Mac
+     int ret = 0;
+     
+     GDisplay *gdisp = GDrawGetDisplayOfWindow(0);
